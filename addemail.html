@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Форма для рассылки</title>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="form_block">
+            <h3>Введите ваше Имя, Фамилию и email для внесения их в список рассылки.</h3>
+            <form method="post" action="addemail.php">
+                <label for="firstname">Имя:</label>
+                <input type="text" id="firstname" name="firstname" />
+                <br />
+                <label for="lastname">Фамилия:</label>
+                <input type="text" id="lastname" name="lastname" />
+                <br />
+                <label for="email">Ваш email:</label>
+                <input type="text" id="email" name="email" />
+                <br />
+                <input type="submit" value="Отправить" name="submit" />
+            </form>
+            <hr />
+            <h3>Персональная рассылка! </h3>
+            <form method="post" action="sendemail.php">
+                <label for="subject">Тема электронного письма:</label>
+                <input type="text" id="subject" name="subject" />
+                <br />
+                <label for="elvismail">Содержание эл. письма:</label>
+                <textarea type="text" id="elvismail" name="elvismail" rows="8" cols="50"></textarea>
+                <br />
+                <input type="submit" value="Отправить" name="submit" />
+            </form>
+            <hr />
+            <h3>Введите эл. адрес для удаления</h3>
+            <form method="post" action="removeemail.php">
+                <label for="email">Адрес:</label>
+                <input type="text" id="email" name="email" />
+                <br />
+                <input type="submit" value="Удалить" name="submit" />
+            </form>
+        </div>
+        <div class="for_text">
+            <h3>Соединение с Базой данных </h3>
+            <pre>
+$dbc = mysql_connect('Хост размещения БД', 'Имя пользователя БД', 'Пароль пользователя БД', 'Имя БД')
+or die ('Ошибка соединения с MySQL-сервером');
+Пример:
+    $dbc = mysql_connect('localhost', 'root', 'root', 'my_bd')
+    or die ('Ошибка соединения с MySQL-сервером');
+    </pre>
+            <h3>Составление строки запроса</h3>
+            <pre>
+$query = "INSERT INTO имя таблицы (Имена, калонок, таблицы)" .
+"VALUES ('Данные', 'добавляемые ', 'в', 'таблицу')"; 
+Пример: 
+    $query = "INSERT INTO table_name(first_name, last_name)" . 
+    "VALUES ('$first_name', '$last_name')";
+//Имена колонок строго совпадают с добавляемыми данными
+    </pre>
+            <h3>Выполнение запроса</h3>
+            <pre>
+$result = mysqli_query(Ссылка на соединение с БД $bdc, запрос $query)
+or die ('Ошибка выполнения запроса');    
+    </pre>
+            <h3>Закрытие соединения</h3>
+            <pre>
+mysqli_close(Ссылка на соединение с БД $bdc); 
+    </pre>
+        </div>
+    </div>
+</body>
+
+</html>

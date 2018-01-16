@@ -1,0 +1,47 @@
+.error {
+    font-weight: bold;
+    color: hsl(0, 100%, 50%);
+}
+
+.score {
+    font-size: 150%;
+    color: hsl(232, 40%, 35%);
+}
+
+.scoreinfo {
+    vertical-align: top;
+    padding-right: 15px;
+}
+
+body {
+    height: 100%;
+    padding: 30px 70px
+}
+
+h2 {
+    text-align: center;
+}
+
+.wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.wrap_form {
+    display: grid;
+    justify-content: center;
+}
+
+input {
+    margin: 5px;
+}
+
+input[type=submit] {
+    width: 150px;
+    height: 30px;
+    cursor: pointer;
+}
+
+input[type=file] {
+    cursor: pointer;
+}

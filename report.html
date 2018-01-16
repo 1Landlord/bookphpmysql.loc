@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+    <title>СООБЩЕНИЕ</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+    <ul>
+        <li><a href="/addemail.html">Форма для рассылки</a></li>
+    </ul>
+<div class="wrap">
+    <div class="form_block">
+    <h2>Сообщение</h2>
+    <p>Расскажите историю о похищении вас космическими пришельцами:</p>
+    <form method="post" action="report.php">
+        <label for="firstname">Имя:</label>
+        <input type="text" id="firstname" name="firstname" /><br />
+        <label for="lastname">Фамилия:</label>
+        <input type="text" id="lastname" name="lastname" /><br />
+        <label for="email">Ваш email?</label>
+        <input type="text" id="email" name="email" /><br />
+        <label for="whenithappened">Когда это произошло?</label>
+        <input type="text" id="whenithappened" name="whenithappened" /><br />
+        <label for="howlong">Как долго вы отсутствовали?</label>
+        <input type="text" id="howlong" name="howlong" /><br />
+        <label for="howmany">Сколько их было?</label>
+        <input type="text" id="howmany" name="howmany" /><br />
+        <label for="aliendescription">Опишите их:</label>
+        <input type="text" id="aliendescription" name="aliendescription" size="32" /><br />
+        <label for="whattheydid">Что они делали с вами?</label>
+        <input type="text" id="whattheydid" name="whattheydid" size="32" /><br />
+        <label for="fangspotted">Видели ли вы Фэнга?</label>
+        Да <input id="fangspotted" name="fangspotted" type="radio" value="Да" />
+        Нет <input id="fangspotted" name="fangspotted" type="radio" value="Нет" /><br />
+        <img src="fang.jpg" width="100" height="175"
+        alt="My Fang." /><br />
+        <label for="other">Дополнительная информация:</label>
+        <textarea id="other" name="other"></textarea><br />
+        <input type="submit" value="Сообщение" name="submit" />
+    </form>
+    </div>
+    <div class="for_text">
+    <h3>Соединение с Базой данных </h3>
+    <pre>
+$dbc = ('Хост размещения БД', 'Имя пользователя БД', 'Пароль пользователя БД', 'Имя БД')
+or die ('Ошибка соединения с MySQL-сервером');
+    </pre>
+    <h3>Составление строки запроса</h3>
+    <pre>
+$query = "INSERT INTO имя таблицы (Имена, калонок, таблицы)" .
+"VALUES ('Данные', 'добавляемые ', 'в', 'таблицу')"; 
+Пример: 
+    $query = "INSERT INTO table_name(first_name, last_name)" . 
+    "VALUES ('$first_name', '$last_name')";
+//Имена колонок строго совпадают с добавляемыми данными
+    </pre>
+    <h3>Выполнение запроса</h3>
+    <pre>
+$result = mysqli_query(Ссылка на соединение с БД $bdc, запрос $query)
+or die ('Ошибка выполнения запроса');    
+    </pre>
+    <h3>Закрытие соединения</h3>
+    <pre>
+mysqli_close(Ссылка на соединение с БД $bdc); 
+    </pre>
+    </div>
+</div>
+</body>
+</html>
+
+
