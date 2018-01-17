@@ -29,7 +29,7 @@
           && ($screenshot_size > 0) && ($screenshot_size <= GW_MAXFILESIZE)) {
           if ($_FILES['screenshot']['error'] == 0) {
         //Перемещаем файл в постоянный каталог для изображений
-        $target = GW_UPLOADPACH . $screenshot;
+        $target = GW_UPLOADPATH . $screenshot;
         if (move_uploaded_file($_FILES['screenshot']['tmp_name'], $target)) {
         // Соединение с базой данных
         require_once('connectvars.php');
@@ -42,7 +42,7 @@
       echo '<p>Спасибо, что добавили свой рейтинг!</p>';
       echo '<p><strong>Имя:</strong> ' . $name . '<br />';
       echo '<strong>Рейтинг:</strong> ' . $score . '</p>';
-      echo '<img src"' . GW_UPLOADPACH . $screenshot . '" alt="Изображение подтверждающее подлиность рейтинга" /><br />';
+      echo '<img src="' . GW_UPLOADPATH . $screenshot . '" alt="Изображение с рейтингом" /></p>';
       echo '<p><a href="index.php">&lt;&lt; Назад к списку рейтингов</a></p>';
 
         // Очистка полей ввода данных
@@ -58,7 +58,7 @@
   }
 }
 else {
-  echo '<p class="error"Файл, подтвнрждающий рейтинг, должен быть файлом изображения GIF, JPEG или PNG, и его размер не должен превышать ' . (GW_MAXFILESIZE / 1024) . ' KB in size.</p>';
+  echo '<p class="error">Файл, подтверждающий рейтинг, должен быть файлом изображения GIF, JPEG или PNG, и его размер не должен превышать ' . (GW_MAXFILESIZE / 1024) . ' KB in size.</p>';
 }
 
 // Попытка удалить временный файл изображения, подтверждающий рейтинг
