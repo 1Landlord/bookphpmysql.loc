@@ -3,6 +3,12 @@
     color: hsl(0, 100%, 50%);
 }
 
+.topscoreheader {
+    text-align: center;
+    font-size: 200%;
+    background-color: #36407f;
+    color: #ffffff;
+}
 .score {
     font-size: 150%;
     color: hsl(232, 40%, 35%);
