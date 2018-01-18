@@ -38,6 +38,10 @@ h2 {
     justify-content: center;
 }
 
+table, td {
+    padding: 5px;
+}
+
 input {
     margin: 5px;
 }
