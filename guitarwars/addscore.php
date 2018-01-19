@@ -17,25 +17,24 @@
     require_once('appvars.php');
 
   if (isset($_POST['submit'])) {
+    // Соединение с базой данных
+    require_once('connectvars.php');
     // Извлечение данных из массива POST
-    $name = $_POST['name'];
-    $score = $_POST['score'];
-    $screenshot = $_FILES['screenshot']['name'];
+    $name = mysqli_real_escape_string($dbc, trim($_POST['name']));
+    $score = mysqli_real_escape_string($dbc, trim($_POST['score']));
+    $screenshot = mysqli_real_escape_string($dbc, trim($_FILES['screenshot']['name']));
     $screenshot_type = $_FILES['screenshot']['type'];
     $screenshot_size = $_FILES['screenshot']['size'];
 
-    if (!empty($name) && !empty($score) && !empty($screenshot)) {
+    if (!empty($name) && is_numeric($score) && !empty($screenshot)) {
         if ((($screenshot_type == 'image/gif') || ($screenshot_type == 'image/jpeg') || ($screenshot_type == 'image/pjpeg') || ($screenshot_type == 'image/png'))
           && ($screenshot_size > 0) && ($screenshot_size <= GW_MAXFILESIZE)) {
           if ($_FILES['screenshot']['error'] == 0) {
         //Перемещаем файл в постоянный каталог для изображений
         $target = GW_UPLOADPATH . $screenshot;
         if (move_uploaded_file($_FILES['screenshot']['tmp_name'], $target)) {
-        // Соединение с базой данных
-        require_once('connectvars.php');
-
         // Запись в базу данных
-        $query = "INSERT INTO guitarwars VALUES (0, NOW(), '$name', '$score', '$screenshot')";
+        $query = "INSERT INTO guitarwars (date, name, score, screenshot) VALUES (NOW(), '$name', '$score', '$screenshot')";
         mysqli_query($dbc, $query);
 
       // Вывод пользователю подтверждения в получении данных
