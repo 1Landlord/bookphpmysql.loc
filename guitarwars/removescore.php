@@ -1,3 +1,7 @@
+<?php
+require_once('autorize.php');
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
