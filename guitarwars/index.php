@@ -27,7 +27,7 @@
   // Извлечение данных рейтингов из базы MySQL
   //$query = "SELECT * FROM guitarwars";
   //Новый запрос извлечения данных, в порядке убывания score (score DESC)
-  $query = "SELECT * FROM guitarwars ORDER BY score DESC, date ASC";
+  $query = "SELECT * FROM guitarwars WHERE approved = 1 ORDER BY score DESC, date ASC";
   $data = mysqli_query($dbc, $query);
 
   // Извлечение данных из массива в цикле. Формирование данных записей в виде кода HTML 
