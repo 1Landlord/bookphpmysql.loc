@@ -1,3 +1,6 @@
+<?php
+    require_once('login.php');
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -48,7 +51,7 @@
             // Новый файл изображения не удалось переместить, поэтому удалите временный файл и установите флаг ошибки
             @unlink($_FILES['new_picture']['tmp_name']);
             $error = true;
-            echo '<p class="error">Sorry, there was a problem uploading your picture.</p>';
+            echo '<p class="error">Извините, была проблема с загрузкой вашей фотографии.</p>';
           }
         }
       }
@@ -56,8 +59,8 @@
         // Новый файл изображения недопустим, поэтому удалите временный файл и установите флаг ошибки
         @unlink($_FILES['new_picture']['tmp_name']);
         $error = true;
-        echo '<p class="error">Your picture must be a GIF, JPEG, or PNG image file no greater than ' . (MM_MAXFILESIZE / 1024) .
-          ' KB and ' . MM_MAXIMGWIDTH . 'x' . MM_MAXIMGHEIGHT . ' pixels in size.</p>';
+        echo '<p class="error">Изображение должно быть в формате GIF, JPEG или PNG не более ' . (MM_MAXFILESIZE / 1024) .
+          ' KB and ' . MM_MAXIMGWIDTH . 'x' . MM_MAXIMGHEIGHT . ' пикселов.</p>';
       }
     }
 

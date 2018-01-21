@@ -1,3 +1,6 @@
+<?php
+    require_once('login.php');
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -54,7 +57,7 @@
     if (!empty($row['birthdate'])) {
       if (!isset($_GET['user_id']) || ($user_id == $_GET['user_id'])) {
         // Показать пользователю их собственную дату рождения
-        echo '<tr><td class="label">Birthdate:</td><td>' . $row['birthdate'] . '</td></tr>';
+        echo '<tr><td class="label">День рождения:</td><td>' . $row['birthdate'] . '</td></tr>';
       }
       else {
         // Показать только год рождения для всех остальных
