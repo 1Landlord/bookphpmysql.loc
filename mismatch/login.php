@@ -29,7 +29,7 @@
     header('HTTP/1.1 401 Unauthorized');
     header('WWW-Authenticate: Basic realm="Mismatch"');
     exit('<h2>Несоответствия</h2>Вы должны ввести ваше Имя и пароль для того, ' .
-      'чтобы получить доступ к приложению. <a href="signup.php">sign up</a>.');
+      'чтобы получить доступ к приложению. <a href="signup.php">Создать</a>.');
   }
 
   // Подтверждение успешного входа
