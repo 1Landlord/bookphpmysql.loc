@@ -1,6 +1,3 @@
-<?php
-    require_once('login.php');
-?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -16,12 +13,22 @@
 <?php
   //Инициализация констант
   require_once('appvars.php');
+
+  // Убедитесь, что пользователь вошел в систему, прежде чем идти дальше.
+  if (!isset($_COOKIE['user_id'])) {
+    echo '<p class="login">Please <a href="login.php">log in</a> to access this page.</p>';
+    exit();
+  }
+  else {
+    echo('<p class="login">Вы вошли как  ' . $_COOKIE['username'] . '. <a href="logout.php">Выйти</a>.</p>');
+}
+
   // Соединение с базой данных
   require_once('connectvars.php');
 
   // Захват данных профиля из базы данных
   if (!isset($_GET['user_id'])) {
-    $query = "SELECT username, first_name, last_name, gender, birthdate, city, state, picture FROM mismatch_user WHERE user_id = '$user_id'";
+    $query = "SELECT username, first_name, last_name, gender, birthdate, city, state, picture FROM mismatch_user WHERE user_id = '" . $_COOKIE['user_id'] . "'";
   }
   else {
     $query = "SELECT username, first_name, last_name, gender, birthdate, city, state, picture FROM mismatch_user WHERE user_id = '" . $_GET['user_id'] . "'";

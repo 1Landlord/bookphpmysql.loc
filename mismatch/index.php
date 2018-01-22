@@ -15,9 +15,14 @@
   require_once('appvars.php');
   
   // Создание меню навигации
-  echo '&#10084; <a href="viewprofile.php">Просмотр профиля</a><br />';
-  echo '&#10084; <a href="editprofile.php">Редактирование профиля</a><br />';
-
+  if (isset($_COOKIE['username'])) {
+    echo '&#10084; <a href="viewprofile.php">Просмотр профиля</a><br />';
+    echo '&#10084; <a href="editprofile.php">Редактирование профиля</a><br />';
+    echo '&#10084; <a href="logout.php">Выход из приложения (' . $_COOKIE['username'] . ') </a>';
+  }else {
+    echo '&#10084; <a href="login.php">Вход в приложение</a><br />';
+    echo '&#10084; <a href="signup.php">Создание учетной записи</a>';
+  }
   // Соединение с базой данных
   require_once('connectvars.php'); 
 
