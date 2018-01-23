@@ -74,7 +74,7 @@
         }
         else {
           $query = "UPDATE mismatch_user SET first_name = '$first_name', last_name = '$last_name', gender = '$gender', " .
-            " birthdate = '$birthdate', city = '$city', state = '$state' WHERE user_id = '$user_id'";
+            " birthdate = '$birthdate', city = '$city', state = '$state' WHERE user_id = '" . $_SESSION['user_id'] . "'";
         }
         mysqli_query($dbc, $query);
 
