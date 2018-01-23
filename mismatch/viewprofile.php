@@ -62,7 +62,7 @@
       echo '</td></tr>';
     }
     if (!empty($row['birthdate'])) {
-      if (!isset($_GET['user_id']) || ($user_id == $_GET['user_id'])) {
+      if (!isset($_GET['user_id']) || ($_COOKIE['user_id'] == $_GET['user_id'])) {
         // Показать пользователю их собственную дату рождения
         echo '<tr><td class="label">День рождения:</td><td>' . $row['birthdate'] . '</td></tr>';
       }
@@ -80,7 +80,7 @@
         '" alt="Profile Picture" /></td></tr>';
     }
     echo '</table>';
-    if (!isset($_GET['user_id']) || ($user_id == $_GET['user_id'])) {
+    if (!isset($_GET['user_id']) || ($_COOKIE['user_id'] == $_GET['user_id'])) {
       echo '<p>Не хотите ли вы <a href="editprofile.php">редактировать профиль</a>?</p>';
     }
   } // Конец проверки для одной строки результатов пользователя
