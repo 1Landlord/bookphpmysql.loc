@@ -1,28 +1,12 @@
 <?php
-  session_start();
-
-  // Если параметры сеанса не заданы, попробуйте установить их с помощью файла cookie
-  if (!isset($_SESSION['user_id'])) {
-    if (isset($_COOKIE['user_id']) && isset($_COOKIE['username'])) {
-      $_SESSION['user_id'] = $_COOKIE['user_id'];
-      $_SESSION['username'] = $_COOKIE['username'];
-    }
-  }
-?>
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Несоответствие-Редактировать Профиль</title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
-</head>
-<body>
-  <h3>Несоответствие-Редактировать Профиль</h3>
-
-<?php
-  require_once('appvars.php');
+    //Открытие сессии
+      require_once('startsession.php');
+    //Вывод заголовка страницы
+      require_once('header.php');
+    //Инициализация констант
+      require_once('appvars.php');
+    // Вывод меню навигации
+      require_once('navmenu.php');
 
   // Проверка, вошел ли пользователь, прежде чем двигаться дальше.
   if (!isset($_SESSION['user_id'])) {
@@ -158,5 +142,6 @@
     </fieldset>
     <input type="submit" value="Сохранить профиль" name="submit" />
   </form>
-</body> 
-</html>
+<?php
+  require_once('footer.php');
+?>

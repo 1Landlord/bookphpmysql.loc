@@ -80,6 +80,8 @@
     echo('<p class="login">Вы вошли в приложение как ' . $_SESSION['username'] . '.</p>');
   }
 ?>
+<?php
+    //Футер
+    require_once('footer.php');
+?>
 
-</body>
-</html>

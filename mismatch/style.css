@@ -31,3 +31,8 @@ input[type = submit] {
   height: 30px;
   cursor: pointer;
 }
+
+.footer {
+  text-align: center;
+  font-size: 80%;
+}

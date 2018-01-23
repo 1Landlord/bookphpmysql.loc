@@ -1,30 +1,12 @@
 <?php
-  session_start();
-
-  // Если параметры сеанса не заданы, попробуйте установить их с помощью файла cookie
-  if (!isset($_SESSION['user_id'])) {
-    if (isset($_COOKIE['user_id']) && isset($_COOKIE['username'])) {
-      $_SESSION['user_id'] = $_COOKIE['user_id'];
-      $_SESSION['username'] = $_COOKIE['username'];
-    }
-  }
-?>
-
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Несоответствие-Просмотр Профиля</title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
-</head>
-<body>
-  <h3>Несоответствие-Просмотр Профиля</h3>
-
-<?php
-  //Инициализация констант
-  require_once('appvars.php');
+    //Открытие сессии
+      require_once('startsession.php');
+    //Вывод заголовка страницы
+      require_once('header.php');
+    //Инициализация констант
+      require_once('appvars.php');
+    // Вывод меню навигации
+      require_once('navmenu.php');
 
   // Убедитесь, что пользователь вошел в систему, прежде чем идти дальше.
   if (!isset($_SESSION['user_id'])) {
@@ -102,5 +84,8 @@
 
   mysqli_close($dbc);
 ?>
-</body> 
-</html>
+<?php
+    //Футер
+    require_once('footer.php');
+?>
+
