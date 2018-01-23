@@ -1,5 +1,13 @@
 <?php
-    require_once('login.php');
+  session_start();
+
+  // Если параметры сеанса не заданы, попробуйте установить их с помощью файла cookie
+  if (!isset($_SESSION['user_id'])) {
+    if (isset($_COOKIE['user_id']) && isset($_COOKIE['username'])) {
+      $_SESSION['user_id'] = $_COOKIE['user_id'];
+      $_SESSION['username'] = $_COOKIE['username'];
+    }
+  }
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -15,6 +23,16 @@
 
 <?php
   require_once('appvars.php');
+
+  // Проверка, вошел ли пользователь, прежде чем двигаться дальше.
+  if (!isset($_SESSION['user_id'])) {
+    echo '<p class="login">Пожалуйста <a href="login.php">log in</a> войдите в приложение.</p>';
+    exit();
+  }
+  else {
+    echo('<p class="login">Вы вошли в приложение как ' . $_SESSION['username'] . '. <a href="logout.php">Выход из приложения</a>.</p>');
+  }
+
   // Соединение с базой данных
   require_once('connectvars.php');
 
@@ -70,11 +88,11 @@
         // Только установите столбец изображения, если есть новое изображение
         if (!empty($new_picture)) {
           $query = "UPDATE mismatch_user SET first_name = '$first_name', last_name = '$last_name', gender = '$gender', " .
-            " birthdate = '$birthdate', city = '$city', state = '$state', picture = '$new_picture' WHERE user_id = '" . $_COOKIE['user_id'] . "'";
+            " birthdate = '$birthdate', city = '$city', state = '$state', picture = '$new_picture' WHERE user_id = '" . $_SESSION['user_id'] . "'";
         }
         else {
           $query = "UPDATE mismatch_user SET first_name = '$first_name', last_name = '$last_name', gender = '$gender', " .
-            " birthdate = '$birthdate', city = '$city', state = '$state' WHERE user_id = '$user_id'";
+            " birthdate = '$birthdate', city = '$city', state = '$state' WHERE user_id = '" . $_SESSION['user_id'] . "'";
         }
         mysqli_query($dbc, $query);
 
@@ -91,7 +109,7 @@
   } // Окончание проверки на подачу формы
   else {
     // Захват данных профиля из базы данных
-    $query = "SELECT first_name, last_name, gender, birthdate, city, state, picture FROM mismatch_user WHERE user_id = '" . $_COOKIE['user_id'] . "' ";
+    $query = "SELECT first_name, last_name, gender, birthdate, city, state, picture FROM mismatch_user WHERE user_id = '" . $_SESSION['user_id'] . "' ";
     $data = mysqli_query($dbc, $query);
     $row = mysqli_fetch_array($data);
 
