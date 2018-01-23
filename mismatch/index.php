@@ -1,3 +1,14 @@
+<?php
+  session_start();
+
+  // Если параметры сеанса не заданы, попробуйте установить их с помощью файла cookie
+  if (!isset($_SESSION['user_id'])) {
+    if (isset($_COOKIE['user_id']) && isset($_COOKIE['username'])) {
+      $_SESSION['user_id'] = $_COOKIE['user_id'];
+      $_SESSION['username'] = $_COOKIE['username'];
+    }
+  }
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -15,10 +26,10 @@
   require_once('appvars.php');
   
   // Создание меню навигации
-  if (isset($_COOKIE['username'])) {
+  if (isset($_SESSION['username'])) {
     echo '&#10084; <a href="viewprofile.php">Просмотр профиля</a><br />';
     echo '&#10084; <a href="editprofile.php">Редактирование профиля</a><br />';
-    echo '&#10084; <a href="logout.php">Выход из приложения (' . $_COOKIE['username'] . ') </a>';
+    echo '&#10084; <a href="logout.php">Выход из приложения (' . $_SESSION['username'] . ') </a>';
   }else {
     echo '&#10084; <a href="login.php">Вход в приложение</a><br />';
     echo '&#10084; <a href="signup.php">Создание учетной записи</a>';
@@ -40,7 +51,12 @@
     else {
       echo '<tr><td><img src="' . MM_UPLOADPATH . 'nopic.jpg' . '" alt="' . $row['first_name'] . '" /></td>';
     }
-    echo '<td>' . $row['first_name'] . '</td></tr>';
+    if (isset($_SESSION['user_id'])) {
+      echo '<td><a href="viewprofile.php?user_id=' . $row['user_id'] . '">' . $row['first_name'] . '</a></td></tr>';
+    }
+    else {
+      echo '<td>' . $row['first_name'] . '</td></tr>';
+    }
   }
   echo '</table>';
 
