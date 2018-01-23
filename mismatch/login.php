@@ -5,7 +5,7 @@
   $error_msg = "";
   //Если пользователь еще не вошел в приложени, попытка войти
 if(!isset($_COOKIE['user_id'])) {
-    if(!isset($POST['submit'])) {
+    if(isset($POST['submit'])) {
         // Получение введенных данных пользователем для аутентификации
         $user_username = mysqli_real_escape_string($dbc, trim($_POST['username']));
         $user_password = mysqli_real_escape_string($dbc, trim($_POST['password']));
