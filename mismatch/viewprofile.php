@@ -2,6 +2,7 @@
     //Открытие сессии
       require_once('startsession.php');
     //Вывод заголовка страницы
+      $page_title = 'Просмотр профиля.';
       require_once('header.php');
     //Инициализация констант
       require_once('appvars.php');

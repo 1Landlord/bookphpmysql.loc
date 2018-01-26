@@ -3,6 +3,7 @@
     require_once('startsession.php');
 
     //Вывод заголовка страницы
+    $page_title = 'Там, где противоположности сходятся!';
     require_once('header.php');
 
     //Инициализация констант
@@ -17,7 +18,7 @@
   $query = "SELECT user_id, first_name, picture FROM mismatch_user WHERE first_name IS NOT NULL ORDER BY join_date DESC LIMIT 5";
   $data = mysqli_query($dbc, $query);
 
-  // Прохождение в цикле массива данных пользователей, вывод в формате HTML   
+  // Прохождение в цикле массива данных пользователей, вывод в формате HTML
   echo '<h4>Новые члены сообщества:</h4>';
   echo '<table>';
   while ($row = mysqli_fetch_array($data)) {
