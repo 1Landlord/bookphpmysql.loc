@@ -23,7 +23,7 @@
   $data = mysqli_query($dbc, $query);
   if (mysqli_num_rows($data) == 0) {
     // Вначале извлечение списка идентификаторов признаков несоответствия из таблицы mismatch_topic
-    $query = "SELECT topic_id FROM mismatch_topic ORDER BY category, topic_id";
+    $query = "SELECT topic_id FROM mismatch_topic ORDER BY category_id, topic_id";
     $data = mysqli_query($dbc, $query);
     $topicIDs = array();
     while ($row = mysqli_fetch_array($data)) {
@@ -48,19 +48,15 @@
   }
 
   // Извлечение данных признаков несоответствия из базы для создания формы
-  $query = "SELECT response_id, topic_id, response FROM mismatch_response WHERE user_id = '" . $_SESSION['user_id'] . "'";
+  $query = "SELECT mr.response_id, mr.topic_id, mr.response, mt.name AS topic_name, mc.name AS category_name " .
+    "FROM mismatch_response AS mr " .
+    "INNER JOIN mismatch_topic AS mt USING (topic_id) " .
+    "INNER JOIN mismatch_category AS mc USING (category_id) " .
+    "WHERE mr.user_id = '" . $_SESSION['user_id'] . "'";
   $data = mysqli_query($dbc, $query);
   $responses = array();
   while ($row = mysqli_fetch_array($data)) {
-    // Поиск имен признаков несоответствия в таблице mismatch_topic для создания формы
-    $query2 = "SELECT name, category FROM mismatch_topic WHERE topic_id = '" . $row['topic_id'] . "'";
-    $data2 = mysqli_query($dbc, $query2);
-    if (mysqli_num_rows($data2) == 1) {
-      $row2 = mysqli_fetch_array($data2);
-      $row['topic_name'] = $row2['name'];
-      $row['category_name'] = $row2['category'];
-      array_push($responses, $row);
-    }
+    array_push($responses, $row);
   }
 
   mysqli_close($dbc);
